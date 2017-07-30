@@ -7,6 +7,7 @@ TODO list:
 -Make game more dynamic
 -Make piano final effect more interesting
 -Make different levels of complexity of the game
+
 Screenshots from the game:
 <a href="https://image.ibb.co/bFJMc5/Webp_net_gifmaker_3.gif"><img src="https://image.ibb.co/bFJMc5/Webp_net_gifmaker_3.gif"/></a>
 <a href="https://image.ibb.co/iXSa4k/Webp_net_gifmaker_1.gif"><img src="https://image.ibb.co/iXSa4k/Webp_net_gifmaker_1.gif"/></a>
