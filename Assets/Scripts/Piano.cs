@@ -31,7 +31,7 @@ public class Piano : MonoBehaviour
         _rectTransform = GetComponent<RectTransform>();
         GetComponent<Image>().color = Color;
 
-        _deadLine = -(Screen.height + _rectTransform.sizeDelta.y / 2f); // setting deadline
+        _deadLine = -(GameController.Instance.ReferenceResolution.y + _rectTransform.sizeDelta.y / 2f); // setting deadline
 	    if (GameController.Instance._bGame) // double-check if game is still running, then start moving
 	    {
 	        _rectTransform.DOAnchorPosY(_deadLine, GameSpeed);

@@ -44,6 +44,7 @@ public class AnimationController : MonoBehaviour
 
     public IEnumerator FinishAnimationWithFade()
     {
+        GameController.Instance.SetNormalResolution();
         if (PianosParent.transform.childCount < GameController.Instance.AmountOfPianosOverScreenWidth) // Make sure we always have all pianos to fit the screen
         {
             for (int i = 0; i < GameController.Instance.AmountOfPianosOverScreenWidth; i++)         // if we have smaller amount that we need, we shall increase it
@@ -117,7 +118,7 @@ public class AnimationController : MonoBehaviour
 
     private void SetPianoToButton(Transform Child)  // bind one big button for piano
     {
-        Child.GetComponent<RectTransform>().DOSizeDelta(new Vector2(Child.GetComponent<RectTransform>().sizeDelta.x, 2500f), 1f);
+        Child.GetComponent<RectTransform>().DOSizeDelta(new Vector2(Child.GetComponent<RectTransform>().sizeDelta.x, 1600f), 1f);
         Child.gameObject.AddComponent<Button>();
         PressBlock.SetActive(true);
 
@@ -144,7 +145,7 @@ public class AnimationController : MonoBehaviour
 
         RestartText.SetActive(true);
         FinishLine.gameObject.SetActive(true);
-        FinishLine.GetComponent<RectTransform>().DOAnchorPosY(-480f, 0.5f);
+        FinishLine.GetComponent<RectTransform>().DOAnchorPosY(0f, 0.5f);
     }
 
     private IEnumerator Move(RectTransform r)

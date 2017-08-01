@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour
     public GameObject PianosParent;
     public bool _bGame{get; private set;} // The variable to controll the game
     public float _widthOfPiano { get; private set; }
+    public Vector3 ReferenceResolution;
 
     /// <summary>
     /// Instance of an object of a GameController class.
@@ -49,7 +50,7 @@ public class GameController : MonoBehaviour
     private float _x;
     private float _gameSpeedCopy;
     private bool _bSpawning;
-    
+
     #endregion // PRIVATE_MEMBER_VARIABLES
 
 
@@ -66,6 +67,8 @@ public class GameController : MonoBehaviour
         {
             _instance = this;
         }
+
+        GetReferenceResolution();
     }
 
     void Start()
@@ -75,9 +78,8 @@ public class GameController : MonoBehaviour
 
             _healthCopy = _health;
             _gameSpeedCopy = GameSpeed;
-            _widthOfPiano = Screen.width / AmountOfPianosOverScreenWidth;
-            FindObjectOfType<CanvasScaler>().referenceResolution =
-                new Vector2(Screen.width, Screen.height); // we need to set up the resolution in that way, because 
+
+            _widthOfPiano = ReferenceResolution.x / AmountOfPianosOverScreenWidth;
             _x = _widthOfPiano / 2; // we do not need canvas scaler's help
 
             //Create health
@@ -95,6 +97,12 @@ public class GameController : MonoBehaviour
 
 
     #region PUBLIC_METHODS
+
+    public void SetNormalResolution()
+    {
+        FindObjectOfType<CanvasScaler>().referenceResolution =
+              new Vector2(1080, 1920);
+    }
 
     public void StartGame()
     {
@@ -170,6 +178,15 @@ public class GameController : MonoBehaviour
 
     #region PRIVATE_METHODS
 
+    private void GetReferenceResolution()
+    {
+        ReferenceResolution = FindObjectOfType<CanvasScaler>().referenceResolution;
+        if (ReferenceResolution.x > ReferenceResolution.y)
+        {
+            ReferenceResolution = new Vector3(ReferenceResolution.y, ReferenceResolution.x);
+        }
+    }
+
     private void FinishGame()
     {
         _bGame = false;
@@ -224,12 +241,13 @@ public class GameController : MonoBehaviour
 
     private void Spawn()
     {
-        GameObject SpawnedGO = Instantiate(Resources.Load("PianoPrefab"), PianosParent.transform) as GameObject;
+        GameObject SpawnedGO = Instantiate(Resources.Load("PianoPrefab")) as GameObject;
+        SpawnedGO.transform.SetParent(PianosParent.transform, false);
         SpawnedGO.GetComponent<Piano>().GameSpeed = GameSpeed;
         RectTransform tempRectTransform = SpawnedGO.GetComponent<RectTransform>();
 
         tempRectTransform.anchoredPosition = new Vector2(_x, tempRectTransform.anchoredPosition.y);
-        if (_x >= Screen.width)
+        if (_x >= ReferenceResolution.x)
         {
             _x = _widthOfPiano / 2;
             tempRectTransform.anchoredPosition = new Vector2(_x, tempRectTransform.anchoredPosition.y);
