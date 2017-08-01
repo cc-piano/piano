@@ -1,6 +1,7 @@
 # Piano
 Piano game
 
+Piano game is one- day chellange project, so this is the game, which was created just for one day.
 The sence of this game is to destroy black falling squares from the top. You can set up the amount of this squares, the amount of the squares, which you allowed to miss. Also, the amount of creation time of this squares. 
 
 TODO 1.Make game more dynamic. 2.Make piano final effect more interesting. 3.Make different levels of complexity of the game. 4. Add texture compression.
